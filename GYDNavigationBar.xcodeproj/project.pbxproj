@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7CC971641E778D59000BC526 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971631E778D59000BC526 /* main.m */; };
+		7CC9717D1E778D59000BC526 /* GYDNavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9717C1E778D59000BC526 /* GYDNavigationBarTests.m */; };
+		7CC971881E778D59000BC526 /* GYDNavigationBarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971871E778D59000BC526 /* GYDNavigationBarUITests.m */; };
+		7CC9719A1E778D88000BC526 /* UIViewController+GYDNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */; };
+		7CC9719E1E778DC0000BC526 /* GYDTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */; };
+		7CC971AC1E778E13000BC526 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9719F1E778E13000BC526 /* abc.png */; };
+		7CC971AD1E778E13000BC526 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A11E778E13000BC526 /* AppDelegate.m */; };
+		7CC971AE1E778E13000BC526 /* BTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A31E778E13000BC526 /* BTableViewController.m */; };
+		7CC971AF1E778E13000BC526 /* BTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971A41E778E13000BC526 /* BTableViewController.xib */; };
+		7CC971B01E778E13000BC526 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A61E778E13000BC526 /* CViewController.m */; };
+		7CC971B11E778E13000BC526 /* GYDNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A81E778E13000BC526 /* GYDNavViewController.m */; };
+		7CC971B31E778E13000BC526 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971AB1E778E13000BC526 /* ViewController.m */; };
+		7CC971B51E778E4C000BC526 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971B41E778E4C000BC526 /* Info.plist */; };
+		7CC971B81E778E95000BC526 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971B61E778E95000BC526 /* LaunchScreen.storyboard */; };
+		7CC971B91E778E95000BC526 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971B71E778E95000BC526 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7CC971791E778D59000BC526 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CC971571E778D59000BC526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CC9715E1E778D59000BC526;
+			remoteInfo = GYDNavigationBar;
+		};
+		7CC971841E778D59000BC526 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CC971571E778D59000BC526 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CC9715E1E778D59000BC526;
+			remoteInfo = GYDNavigationBar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7CC9715F1E778D59000BC526 /* GYDNavigationBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYDNavigationBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC971631E778D59000BC526 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7CC971781E778D59000BC526 /* GYDNavigationBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GYDNavigationBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC9717C1E778D59000BC526 /* GYDNavigationBarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GYDNavigationBarTests.m; sourceTree = "<group>"; };
+		7CC9717E1E778D59000BC526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CC971831E778D59000BC526 /* GYDNavigationBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GYDNavigationBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CC971871E778D59000BC526 /* GYDNavigationBarUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GYDNavigationBarUITests.m; sourceTree = "<group>"; };
+		7CC971891E778D59000BC526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CC971961E778D88000BC526 /* UIViewController+GYDNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GYDNav.h"; sourceTree = "<group>"; };
+		7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GYDNav.m"; sourceTree = "<group>"; };
+		7CC9719C1E778DC0000BC526 /* GYDTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYDTransitionManager.h; sourceTree = "<group>"; };
+		7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYDTransitionManager.m; sourceTree = "<group>"; };
+		7CC9719F1E778E13000BC526 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
+		7CC971A01E778E13000BC526 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7CC971A11E778E13000BC526 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7CC971A21E778E13000BC526 /* BTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTableViewController.h; sourceTree = "<group>"; };
+		7CC971A31E778E13000BC526 /* BTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTableViewController.m; sourceTree = "<group>"; };
+		7CC971A41E778E13000BC526 /* BTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTableViewController.xib; sourceTree = "<group>"; };
+		7CC971A51E778E13000BC526 /* CViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
+		7CC971A61E778E13000BC526 /* CViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
+		7CC971A71E778E13000BC526 /* GYDNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYDNavViewController.h; sourceTree = "<group>"; };
+		7CC971A81E778E13000BC526 /* GYDNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYDNavViewController.m; sourceTree = "<group>"; };
+		7CC971AA1E778E13000BC526 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7CC971AB1E778E13000BC526 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7CC971B41E778E4C000BC526 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CC971B61E778E95000BC526 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7CC971B71E778E95000BC526 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CC9715C1E778D59000BC526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC971751E778D59000BC526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC971801E778D59000BC526 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7CC971561E778D59000BC526 = {
+			isa = PBXGroup;
+			children = (
+				7CC971611E778D59000BC526 /* GYDNavigationBar */,
+				7CC9717B1E778D59000BC526 /* GYDNavigationBarTests */,
+				7CC971861E778D59000BC526 /* GYDNavigationBarUITests */,
+				7CC971601E778D59000BC526 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7CC971601E778D59000BC526 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9715F1E778D59000BC526 /* GYDNavigationBar.app */,
+				7CC971781E778D59000BC526 /* GYDNavigationBarTests.xctest */,
+				7CC971831E778D59000BC526 /* GYDNavigationBarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CC971611E778D59000BC526 /* GYDNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				7CC971951E778D88000BC526 /* GYDNavigationBar */,
+				7CC971A01E778E13000BC526 /* AppDelegate.h */,
+				7CC971A11E778E13000BC526 /* AppDelegate.m */,
+				7CC971A21E778E13000BC526 /* BTableViewController.h */,
+				7CC971A31E778E13000BC526 /* BTableViewController.m */,
+				7CC971A41E778E13000BC526 /* BTableViewController.xib */,
+				7CC971A51E778E13000BC526 /* CViewController.h */,
+				7CC971A61E778E13000BC526 /* CViewController.m */,
+				7CC971A71E778E13000BC526 /* GYDNavViewController.h */,
+				7CC971A81E778E13000BC526 /* GYDNavViewController.m */,
+				7CC971B61E778E95000BC526 /* LaunchScreen.storyboard */,
+				7CC971B71E778E95000BC526 /* Main.storyboard */,
+				7CC971AA1E778E13000BC526 /* ViewController.h */,
+				7CC971AB1E778E13000BC526 /* ViewController.m */,
+				7CC971621E778D59000BC526 /* Supporting Files */,
+			);
+			path = GYDNavigationBar;
+			sourceTree = "<group>";
+		};
+		7CC971621E778D59000BC526 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CC971B41E778E4C000BC526 /* Info.plist */,
+				7CC9719F1E778E13000BC526 /* abc.png */,
+				7CC971631E778D59000BC526 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CC9717B1E778D59000BC526 /* GYDNavigationBarTests */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9717C1E778D59000BC526 /* GYDNavigationBarTests.m */,
+				7CC9717E1E778D59000BC526 /* Info.plist */,
+			);
+			path = GYDNavigationBarTests;
+			sourceTree = "<group>";
+		};
+		7CC971861E778D59000BC526 /* GYDNavigationBarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7CC971871E778D59000BC526 /* GYDNavigationBarUITests.m */,
+				7CC971891E778D59000BC526 /* Info.plist */,
+			);
+			path = GYDNavigationBarUITests;
+			sourceTree = "<group>";
+		};
+		7CC971951E778D88000BC526 /* GYDNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				7CC9719C1E778DC0000BC526 /* GYDTransitionManager.h */,
+				7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */,
+				7CC971961E778D88000BC526 /* UIViewController+GYDNav.h */,
+				7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */,
+			);
+			path = GYDNavigationBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CC9715E1E778D59000BC526 /* GYDNavigationBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CC9718C1E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBar" */;
+			buildPhases = (
+				7CC9715B1E778D59000BC526 /* Sources */,
+				7CC9715C1E778D59000BC526 /* Frameworks */,
+				7CC9715D1E778D59000BC526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GYDNavigationBar;
+			productName = GYDNavigationBar;
+			productReference = 7CC9715F1E778D59000BC526 /* GYDNavigationBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7CC971771E778D59000BC526 /* GYDNavigationBarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CC9718F1E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarTests" */;
+			buildPhases = (
+				7CC971741E778D59000BC526 /* Sources */,
+				7CC971751E778D59000BC526 /* Frameworks */,
+				7CC971761E778D59000BC526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CC9717A1E778D59000BC526 /* PBXTargetDependency */,
+			);
+			name = GYDNavigationBarTests;
+			productName = GYDNavigationBarTests;
+			productReference = 7CC971781E778D59000BC526 /* GYDNavigationBarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7CC971821E778D59000BC526 /* GYDNavigationBarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CC971921E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarUITests" */;
+			buildPhases = (
+				7CC9717F1E778D59000BC526 /* Sources */,
+				7CC971801E778D59000BC526 /* Frameworks */,
+				7CC971811E778D59000BC526 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CC971851E778D59000BC526 /* PBXTargetDependency */,
+			);
+			name = GYDNavigationBarUITests;
+			productName = GYDNavigationBarUITests;
+			productReference = 7CC971831E778D59000BC526 /* GYDNavigationBarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CC971571E778D59000BC526 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "贵永冬";
+				TargetAttributes = {
+					7CC9715E1E778D59000BC526 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					7CC971771E778D59000BC526 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7CC9715E1E778D59000BC526;
+					};
+					7CC971821E778D59000BC526 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7CC9715E1E778D59000BC526;
+					};
+				};
+			};
+			buildConfigurationList = 7CC9715A1E778D59000BC526 /* Build configuration list for PBXProject "GYDNavigationBar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7CC971561E778D59000BC526;
+			productRefGroup = 7CC971601E778D59000BC526 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CC9715E1E778D59000BC526 /* GYDNavigationBar */,
+				7CC971771E778D59000BC526 /* GYDNavigationBarTests */,
+				7CC971821E778D59000BC526 /* GYDNavigationBarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CC9715D1E778D59000BC526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CC971AF1E778E13000BC526 /* BTableViewController.xib in Resources */,
+				7CC971B91E778E95000BC526 /* Main.storyboard in Resources */,
+				7CC971B81E778E95000BC526 /* LaunchScreen.storyboard in Resources */,
+				7CC971AC1E778E13000BC526 /* abc.png in Resources */,
+				7CC971B51E778E4C000BC526 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC971761E778D59000BC526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC971811E778D59000BC526 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CC9715B1E778D59000BC526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CC971B11E778E13000BC526 /* GYDNavViewController.m in Sources */,
+				7CC971AD1E778E13000BC526 /* AppDelegate.m in Sources */,
+				7CC971B31E778E13000BC526 /* ViewController.m in Sources */,
+				7CC9719E1E778DC0000BC526 /* GYDTransitionManager.m in Sources */,
+				7CC971B01E778E13000BC526 /* CViewController.m in Sources */,
+				7CC9719A1E778D88000BC526 /* UIViewController+GYDNav.m in Sources */,
+				7CC971AE1E778E13000BC526 /* BTableViewController.m in Sources */,
+				7CC971641E778D59000BC526 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC971741E778D59000BC526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CC9717D1E778D59000BC526 /* GYDNavigationBarTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CC9717F1E778D59000BC526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CC971881E778D59000BC526 /* GYDNavigationBarUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7CC9717A1E778D59000BC526 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CC9715E1E778D59000BC526 /* GYDNavigationBar */;
+			targetProxy = 7CC971791E778D59000BC526 /* PBXContainerItemProxy */;
+		};
+		7CC971851E778D59000BC526 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CC9715E1E778D59000BC526 /* GYDNavigationBar */;
+			targetProxy = 7CC971841E778D59000BC526 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7CC9718A1E778D59000BC526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7CC9718B1E778D59000BC526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CC9718D1E778D59000BC526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GYDNavigationBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7CC9718E1E778D59000BC526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GYDNavigationBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7CC971901E778D59000BC526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GYDNavigationBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GYDNavigationBar.app/GYDNavigationBar";
+			};
+			name = Debug;
+		};
+		7CC971911E778D59000BC526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GYDNavigationBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GYDNavigationBar.app/GYDNavigationBar";
+			};
+			name = Release;
+		};
+		7CC971931E778D59000BC526 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GYDNavigationBarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GYDNavigationBar;
+			};
+			name = Debug;
+		};
+		7CC971941E778D59000BC526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GYDNavigationBarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GYDNavigationBar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CC9715A1E778D59000BC526 /* Build configuration list for PBXProject "GYDNavigationBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CC9718A1E778D59000BC526 /* Debug */,
+				7CC9718B1E778D59000BC526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CC9718C1E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CC9718D1E778D59000BC526 /* Debug */,
+				7CC9718E1E778D59000BC526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7CC9718F1E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CC971901E778D59000BC526 /* Debug */,
+				7CC971911E778D59000BC526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7CC971921E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CC971931E778D59000BC526 /* Debug */,
+				7CC971941E778D59000BC526 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CC971571E778D59000BC526 /* Project object */;
+}
