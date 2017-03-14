@@ -1,2 +1,83 @@
 # GYDNavigationBar
 一款解决导航栏渐变的组件
+
+
+### 描述
+
+开发中我们经常会遇到导航栏透明度的问题，有时候非常难解决。此组件就是为解决上述问题所产生的。用起来很方便。
+
+
+
+### 效果
+
+<div align=center>
+<img src="https://github.com/guiyongdong/Resource/blob/master/hexoImage/GYDNavigationBar.gif?raw=true"/>
+</div>
+
+
+### 使用方法
+
+在你需要改变导航栏透明度的地方导入`UIViewController+GYDNav.h`
+
+```objc
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.d_navBarAlpha = 0.5;
+    [self.navigationController d_setNavigationBarAlpha:0.5];
+}
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    BTableViewController *vc = [[BTableViewController alloc] init];
+    self.d_transitionEnable = YES;
+    [self.navigationController d_pushViewController:vc fromAlpha:self.d_navBarAlpha toAlpha:0];
+}
+```
+
+### API 
+
+公开的API有：
+
+```objc
+/**
+ 设置导航栏的alpha  非动画型
+ 
+ @param alpha 透明度
+ */
+- (void)d_setNavigationBarAlpha:(CGFloat)alpha;
+
+
+/**
+ 设置导航栏线的alpha
+
+ @param alpha 透明度
+ */
+- (void)d_setShadowLineViewAlpha:(CGFloat)alpha;
+
+/**
+ 在push下一个控制器之前 添加转场动画代理 动态地修改导航栏的alpha 防止突兀
+
+ @param viewController toViewController
+ @param fromAlpha 上一个控制器所持有的Alpha
+ @param toAlpha 下一个控制器所持有的Alpha
+ */
+- (void)d_pushViewController:(UIViewController *)viewController fromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha;
+
+/**
+ pop当前控制器  也可以直接只用系统的- (UIViewController *)popViewControllerAnimated:(BOOL)animated方法  与此方法效果一样
+
+ @param fromAlpha 上一个控制器所持有的Alpha
+ @param toAlpha 下一个控制器所持有的Alpha
+ */
+- (void)d_popViewControllerFromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha;
+```
+
+当然 你也可以直接使用系统的push和pop，如果你想自定义转场动画，需要设置`d_transitionEnable`为NO，此属性表示是否启用转场动画，默认YES。
+
+如果你不设置当前控制器的`d_navBarAlpha`透明度，默认为1.0
+
+
+如果你发现有什么BUG，欢迎随时Issues
+
+
+
