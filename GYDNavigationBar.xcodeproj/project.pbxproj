@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C275D261E7A3C8000CAF5E3 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C275D251E7A3C8000CAF5E3 /* abc.png */; };
 		7CC971641E778D59000BC526 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971631E778D59000BC526 /* main.m */; };
 		7CC9717D1E778D59000BC526 /* GYDNavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9717C1E778D59000BC526 /* GYDNavigationBarTests.m */; };
 		7CC971881E778D59000BC526 /* GYDNavigationBarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971871E778D59000BC526 /* GYDNavigationBarUITests.m */; };
 		7CC9719A1E778D88000BC526 /* UIViewController+GYDNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */; };
 		7CC9719E1E778DC0000BC526 /* GYDTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */; };
-		7CC971AC1E778E13000BC526 /* abc.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC9719F1E778E13000BC526 /* abc.png */; };
 		7CC971AD1E778E13000BC526 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A11E778E13000BC526 /* AppDelegate.m */; };
 		7CC971AE1E778E13000BC526 /* BTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A31E778E13000BC526 /* BTableViewController.m */; };
 		7CC971AF1E778E13000BC526 /* BTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971A41E778E13000BC526 /* BTableViewController.xib */; };
@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C275D251E7A3C8000CAF5E3 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
 		7CC9715F1E778D59000BC526 /* GYDNavigationBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GYDNavigationBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CC971631E778D59000BC526 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7CC971781E778D59000BC526 /* GYDNavigationBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GYDNavigationBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +55,6 @@
 		7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GYDNav.m"; sourceTree = "<group>"; };
 		7CC9719C1E778DC0000BC526 /* GYDTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYDTransitionManager.h; sourceTree = "<group>"; };
 		7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYDTransitionManager.m; sourceTree = "<group>"; };
-		7CC9719F1E778E13000BC526 /* abc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = abc.png; sourceTree = "<group>"; };
 		7CC971A01E778E13000BC526 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7CC971A11E778E13000BC526 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7CC971A21E778E13000BC526 /* BTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTableViewController.h; sourceTree = "<group>"; };
@@ -141,8 +141,8 @@
 		7CC971621E778D59000BC526 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C275D251E7A3C8000CAF5E3 /* abc.png */,
 				7CC971B41E778E4C000BC526 /* Info.plist */,
-				7CC9719F1E778E13000BC526 /* abc.png */,
 				7CC971631E778D59000BC526 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -286,7 +286,7 @@
 				7CC971AF1E778E13000BC526 /* BTableViewController.xib in Resources */,
 				7CC971B91E778E95000BC526 /* Main.storyboard in Resources */,
 				7CC971B81E778E95000BC526 /* LaunchScreen.storyboard in Resources */,
-				7CC971AC1E778E13000BC526 /* abc.png in Resources */,
+				7C275D261E7A3C8000CAF5E3 /* abc.png in Resources */,
 				7CC971B51E778E4C000BC526 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GYDNavigationBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -461,6 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GYDNavigationBar/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.guiyongdong.GYDNavigationBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,6 +534,7 @@
 				7CC9718E1E778D59000BC526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7CC9718F1E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +543,7 @@
 				7CC971911E778D59000BC526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7CC971921E778D59000BC526 /* Build configuration list for PBXNativeTarget "GYDNavigationBarUITests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +552,7 @@
 				7CC971941E778D59000BC526 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

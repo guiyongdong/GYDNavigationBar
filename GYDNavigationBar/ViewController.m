@@ -22,7 +22,7 @@
     self.view.backgroundColor = [UIColor yellowColor];
     self.d_navBarAlpha = 1.0;
     NSLog(@"%f",self.d_navBarAlpha);
-    [self.navigationController d_setNavigationBarAlpha:0.5];
+    [self.navigationController d_setNavigationBarAlpha:1.0];
     self.title = @"第一个";
 }
 

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GYDNavigationBar"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "一款解决导航栏透明渐变的组件"
 
   # This description is used to generate tags and improve search results.

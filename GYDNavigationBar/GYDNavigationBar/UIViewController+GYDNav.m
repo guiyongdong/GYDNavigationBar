@@ -15,14 +15,26 @@ static const void *D_NavBarAlpha;
 static const void *D_TransitionEnable;
 static const void *D_TransitionManger;
 static const void *D_FullScreenEnable;
+static const void *D_BarBackgroundView;
+static const void *D_ShadowView;
+static const void *D_PanGesturePop;
 
-
-
-
+#define GYD_IOS10Later ([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0)
 
 @interface UINavigationController ()
 
 @property (nonatomic, strong) GYDTransitionManager *transitionManager;
+
+@property (nonatomic, strong) UIView *barBackgroundView;
+
+@property (nonatomic, strong) UIView *shadowView;
+
+
+/**
+ 是否是pan手势侧滑返回引发的pop 默认NO
+ */
+@property (nonatomic, assign) BOOL isPanGesturePop;
+
 
 @end
 
@@ -45,9 +57,21 @@ static const void *D_FullScreenEnable;
     SEL swizzledPopSelector = @selector(d_popViewControllerAnimated:);
     Method originalPopMethod = class_getInstanceMethod([self class], originalPopSelector);
     Method swizzledPopMethod = class_getInstanceMethod([self class], swizzledPopSelector);
-    method_exchangeImplementations(originalPopMethod, swizzledPopMethod);
+    BOOL didAddMethod = class_addMethod([self class],
+                                        originalPopSelector,
+                                        method_getImplementation(swizzledPopMethod),
+                                        method_getTypeEncoding(swizzledPopMethod));
+    if (didAddMethod) {
+        class_replaceMethod([self class],
+                            swizzledPopSelector,
+                            method_getImplementation(originalPopMethod),
+                            method_getTypeEncoding(originalPopMethod));
+    }else {
+        method_exchangeImplementations(originalPopMethod, swizzledPopMethod);
+    }
 }
 + (void)swizzledingUpdateInteractiveTransition {
+    
     SEL originalSelector = NSSelectorFromString(@"_updateInteractiveTransition:");
     SEL swizzledSelector = @selector(d_updateInteractiveTransition:);
     Method originalMethod = class_getInstanceMethod([self class], originalSelector);
@@ -75,7 +99,6 @@ static const void *D_FullScreenEnable;
 
 
 
-
 #pragma mark - setter/getter
 - (GYDTransitionManager *)transitionManager {
     id transitionManager = objc_getAssociatedObject(self, &D_TransitionManger);
@@ -91,41 +114,64 @@ static const void *D_FullScreenEnable;
     objc_setAssociatedObject(self,&D_TransitionManger,transitionManager,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (UIView *)barBackgroundView {
+    UIView *barBackgroundView  = objc_getAssociatedObject(self, &D_BarBackgroundView);
+    if (barBackgroundView == nil) {
+        UINavigationBar *navigationBar = self.navigationBar;
+        if (!GYD_IOS10Later) {
+            id _backgroundView = [navigationBar valueForKey:@"_backgroundView"];
+            barBackgroundView = _backgroundView;
+        }else {
+            id _backgroundView = [navigationBar valueForKey:@"_barBackgroundView"];
+            id backgroundEffectView = [_backgroundView valueForKey:@"_backgroundEffectView"];
+            barBackgroundView = (UIView *)backgroundEffectView;
+        }
+        self.barBackgroundView = barBackgroundView;
+    }
+    return barBackgroundView;
+}
+
+- (void)setBarBackgroundView:(UIView *)barBackgroundView {
+    if (!barBackgroundView)return;
+    objc_setAssociatedObject(self,&D_BarBackgroundView,barBackgroundView,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIView *)shadowView {
+    UIView *shadowView = objc_getAssociatedObject(self, &D_ShadowView);
+    if (shadowView == nil) {
+        if (!GYD_IOS10Later) {
+            shadowView = [self.barBackgroundView valueForKey:@"_shadowView"];
+        }else {
+            id _backgroundView = [self.navigationBar valueForKey:@"_barBackgroundView"];
+            shadowView = [_backgroundView valueForKey:@"_shadowView"];
+        }
+        self.shadowView = shadowView;
+    }
+    return shadowView;
+}
+- (void)setShadowView:(UIView *)shadowView {
+    if (!shadowView)return;
+    objc_setAssociatedObject(self,&D_ShadowView,shadowView,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isPanGesturePop {
+    id isPanGesturePop = objc_getAssociatedObject(self, &D_PanGesturePop);
+    if (!isPanGesturePop) {
+        return NO;
+    }
+    return [isPanGesturePop boolValue];
+}
+- (void)setIsPanGesturePop:(BOOL)isPanGesturePop {
+    objc_setAssociatedObject(self,&D_PanGesturePop,@(isPanGesturePop),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 
 #pragma mark - pulic methods
 - (void)d_setNavigationBarAlpha:(CGFloat)alpha {
-    id barBackgroundView = [self.navigationBar valueForKey:@"_barBackgroundView"];
-    if (!barBackgroundView) return;
-    UIImageView *backgroundImageView = [barBackgroundView valueForKey:@"_backgroundImageView"];
-    if (self.navigationBar.translucent) {
-        if (backgroundImageView && backgroundImageView.image) {
-            backgroundImageView.alpha = alpha;
-        }else {
-            id backgroundEffectView = [barBackgroundView valueForKey:@"_backgroundEffectView"];
-            if (backgroundEffectView && [backgroundEffectView isKindOfClass:[UIView class]]) [(UIView *)backgroundEffectView setAlpha:alpha];
-        }
-    }else {
-        [(UIView *)barBackgroundView setAlpha:alpha];
-    }
-    
-    id shadowView = [barBackgroundView valueForKey:@"_shadowView"];
-    if (shadowView && [shadowView isKindOfClass:[UIView class]]) {
-        [(UIView *)barBackgroundView setAlpha:alpha];
-    }
+    self.barBackgroundView.alpha = alpha;
+    self.shadowView.alpha = alpha;
 }
-- (void)d_setShadowLineViewAlpha:(CGFloat)alpha {
-    id barBackgroundView = [self.navigationBar valueForKey:@"_barBackgroundView"];
-    if (!barBackgroundView) return;
-    id shadowView = [barBackgroundView valueForKey:@"_shadowView"];
-    if (shadowView && [shadowView isKindOfClass:[UIView class]]) {
-        if (alpha <= 0 ) {
-            [(UIView *)barBackgroundView setHidden:YES];
-        }else {
-            [(UIView *)barBackgroundView setHidden:NO];
-            [(UIView *)barBackgroundView setAlpha:alpha];
-        }
-    }
-}
+
 
 - (void)d_pushViewController:(UIViewController *)viewController fromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha {
     if (fromAlpha == toAlpha) {
@@ -140,10 +186,6 @@ static const void *D_FullScreenEnable;
 }
 
 - (void)d_popViewControllerFromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha {
-    if (fromAlpha == toAlpha) {
-        [self d_popViewControllerAnimated:YES];
-        return;
-    }
     GYDTransitionManager *transitionManager = self.transitionManager;
     transitionManager.fromAlpha = fromAlpha;
     transitionManager.toAlpha = toAlpha;
@@ -155,25 +197,30 @@ static const void *D_FullScreenEnable;
 #pragma mark privity
 
 - (void)d_popViewControllerAnimated:(BOOL)animated {
-    UIViewController *fromViewContrller = self.topViewController;
+    if (self.isPanGesturePop) {
+        [self d_popViewControllerAnimated:animated];
+        return;
+    }
+    __weak UIViewController *fromViewContrller = self.topViewController;
     BOOL d_transitionEnable = fromViewContrller.d_transitionEnable;
     if (!d_transitionEnable) {
         [self d_popViewControllerAnimated:animated];
         return;
     }
     CGFloat fromAlpha = fromViewContrller.d_navBarAlpha;
-    NSArray *vcs = self.viewControllers;
+    __weak NSArray *vcs = self.viewControllers;
     if (vcs.count < 2) {
         [self d_popViewControllerAnimated:animated];
         return;
     }
-    UIViewController *toViewController = [vcs objectAtIndex:vcs.count-2];
+    __weak UIViewController *toViewController = [vcs objectAtIndex:vcs.count-2];
     CGFloat toAlpha = toViewController.d_navBarAlpha;
     if (fromAlpha == toAlpha) {
         [self d_popViewControllerAnimated:animated];
         return;
     }
-    [self d_popViewControllerFromAlpha:fromAlpha toAlpha:toAlpha];
+    [self d_popViewControllerFromAlpha:fromAlpha  toAlpha:toAlpha];
+    return;
 }
 
 - (void)d_updateInteractiveTransition:(CGFloat)percentComplete {
@@ -196,15 +243,30 @@ static const void *D_FullScreenEnable;
     if (gesture) {
         [self setFullScreenEdge:[UIScreen mainScreen].bounds.size.width edgePanGesture:gesture];
         [gesture addTarget:self action:@selector(d_panGesture:)];
+        
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            NSMutableArray *_targets = [gesture valueForKey:@"_targets"];
+            id firstObject = [_targets firstObject];
+            id lastObject = [_targets lastObject];
+            [_targets replaceObjectAtIndex:0 withObject:lastObject];
+            [_targets replaceObjectAtIndex:_targets.count-1 withObject:firstObject];
+            [gesture setValue:_targets forKey:@"_targets"];
+        });
     }
 }
 
 
+
 - (void)d_panGesture:(UIPanGestureRecognizer *)pan {
     switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+            self.isPanGesturePop = YES;
+            break;
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
+            self.isPanGesturePop = NO;
             if ([self.delegate isKindOfClass:[GYDTransitionManager class]]) {
                 self.delegate = nil;
             }
@@ -212,6 +274,7 @@ static const void *D_FullScreenEnable;
         default:
             break;
     }
+    
 }
 
 
@@ -256,7 +319,6 @@ static const void *D_FullScreenEnable;
     dispatch_once(&onceToken, ^{
         [self swizzledingViewDidAppear];
     });
-    
 }
 
 #pragma mark - setter/getter
@@ -334,9 +396,9 @@ static const void *D_FullScreenEnable;
                 [self.navigationController setFullScreenEdge:edge edgePanGesture:gesture];
             }
         }
-        
     }
 }
+
 
 @end
 

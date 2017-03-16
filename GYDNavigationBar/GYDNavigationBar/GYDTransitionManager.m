@@ -18,9 +18,12 @@
 
 @property (nonatomic, assign) UINavigationControllerOperation operation;
 
+
 @end
 
 @implementation GYDTransitionManager
+
+
 
 
 #pragma mark - UINavigationControllerDelegate
@@ -91,8 +94,6 @@
         [containerView addSubview:toView];
         [containerView addSubview:fromView];
         
-        [containerView addSubview:fromView];
-        [containerView addSubview:toView];
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toView.frame = toViewFrame;
             fromView.frame = fromViewFrame;
@@ -105,7 +106,6 @@
         }];
     }
 }
-
 
 
 @end

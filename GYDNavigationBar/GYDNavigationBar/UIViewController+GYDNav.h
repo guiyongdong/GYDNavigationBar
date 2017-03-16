@@ -44,13 +44,6 @@
 
 
 /**
- 设置导航栏线的alpha
-
- @param alpha 透明度
- */
-- (void)d_setShadowLineViewAlpha:(CGFloat)alpha;
-
-/**
  在push下一个控制器之前 添加转场动画代理 动态地修改导航栏的alpha 防止突兀
 
  @param viewController toViewController
@@ -58,14 +51,6 @@
  @param toAlpha 下一个控制器所持有的Alpha
  */
 - (void)d_pushViewController:(UIViewController *)viewController fromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha;
-
-/**
- pop当前控制器  也可以直接只用系统的- (UIViewController *)popViewControllerAnimated:(BOOL)animated方法  与此方法效果一样
-
- @param fromAlpha 上一个控制器所持有的Alpha
- @param toAlpha 下一个控制器所持有的Alpha
- */
-- (void)d_popViewControllerFromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha;
 
 
 
