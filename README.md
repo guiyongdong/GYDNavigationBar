@@ -29,7 +29,6 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     BTableViewController *vc = [[BTableViewController alloc] init];
-    self.d_transitionEnable = YES;
     [self.navigationController d_pushViewController:vc fromAlpha:self.d_navBarAlpha toAlpha:0];
 }
 ```
@@ -46,11 +45,6 @@
  */
 @property (nonatomic, assign) CGFloat d_navBarAlpha;
 
-/**
- 是否启用转场动画 默认YES  此转场动画代理只在动画即将开始时启用在结束时废弃
- */
-@property (nonatomic, assign) BOOL d_transitionEnable;
-
 
 /**
  是否启用全屏侧滑返回 默认YES
@@ -66,7 +60,7 @@
 
 
 /**
- 设置导航栏的alpha  非动画型
+ 设置导航栏的alpha 
  
  @param alpha 透明度
  */
@@ -95,8 +89,6 @@
 
 ```
 
-当然 你也可以直接使用系统的push和pop，如果你想自定义转场动画，需要设置`d_transitionEnable`为NO，此属性表示是否启用转场动画，默认YES。
-
 ### 注意
 
 如果你不设置当前控制器的`d_navBarAlpha`透明度，默认为1.0
@@ -109,7 +101,6 @@
     self.d_fullScreenEnable = NO;
 }
 ```
-
 
 如果你发现有什么BUG，欢迎随时Issues
 
