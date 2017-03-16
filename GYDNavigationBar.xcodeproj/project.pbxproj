@@ -12,7 +12,6 @@
 		7CC9717D1E778D59000BC526 /* GYDNavigationBarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9717C1E778D59000BC526 /* GYDNavigationBarTests.m */; };
 		7CC971881E778D59000BC526 /* GYDNavigationBarUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971871E778D59000BC526 /* GYDNavigationBarUITests.m */; };
 		7CC9719A1E778D88000BC526 /* UIViewController+GYDNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */; };
-		7CC9719E1E778DC0000BC526 /* GYDTransitionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */; };
 		7CC971AD1E778E13000BC526 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A11E778E13000BC526 /* AppDelegate.m */; };
 		7CC971AE1E778E13000BC526 /* BTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC971A31E778E13000BC526 /* BTableViewController.m */; };
 		7CC971AF1E778E13000BC526 /* BTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC971A41E778E13000BC526 /* BTableViewController.xib */; };
@@ -53,8 +52,6 @@
 		7CC971891E778D59000BC526 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CC971961E778D88000BC526 /* UIViewController+GYDNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+GYDNav.h"; sourceTree = "<group>"; };
 		7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+GYDNav.m"; sourceTree = "<group>"; };
-		7CC9719C1E778DC0000BC526 /* GYDTransitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GYDTransitionManager.h; sourceTree = "<group>"; };
-		7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GYDTransitionManager.m; sourceTree = "<group>"; };
 		7CC971A01E778E13000BC526 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7CC971A11E778E13000BC526 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7CC971A21E778E13000BC526 /* BTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTableViewController.h; sourceTree = "<group>"; };
@@ -169,8 +166,6 @@
 		7CC971951E778D88000BC526 /* GYDNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				7CC9719C1E778DC0000BC526 /* GYDTransitionManager.h */,
-				7CC9719D1E778DC0000BC526 /* GYDTransitionManager.m */,
 				7CC971961E778D88000BC526 /* UIViewController+GYDNav.h */,
 				7CC971971E778D88000BC526 /* UIViewController+GYDNav.m */,
 			);
@@ -315,7 +310,6 @@
 				7CC971B11E778E13000BC526 /* GYDNavViewController.m in Sources */,
 				7CC971AD1E778E13000BC526 /* AppDelegate.m in Sources */,
 				7CC971B31E778E13000BC526 /* ViewController.m in Sources */,
-				7CC9719E1E778DC0000BC526 /* GYDTransitionManager.m in Sources */,
 				7CC971B01E778E13000BC526 /* CViewController.m in Sources */,
 				7CC9719A1E778D88000BC526 /* UIViewController+GYDNav.m in Sources */,
 				7CC971AE1E778E13000BC526 /* BTableViewController.m in Sources */,

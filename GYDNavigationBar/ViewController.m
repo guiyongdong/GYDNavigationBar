@@ -18,11 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
     self.view.backgroundColor = [UIColor yellowColor];
     self.d_navBarAlpha = 1.0;
-    NSLog(@"%f",self.d_navBarAlpha);
-    [self.navigationController d_setNavigationBarAlpha:1.0];
+//    [self.navigationController d_setNavigationBarAlpha:1.0];
     self.title = @"第一个";
 
 }
@@ -30,9 +29,9 @@
 
 - (IBAction)push:(id)sender {
     BTableViewController *vc = [[BTableViewController alloc] init];
-    self.d_transitionEnable = YES;
     [self.navigationController d_pushViewController:vc fromAlpha:1.0 toAlpha:0];
 }
+
 
 
 @end

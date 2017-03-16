@@ -8,12 +8,10 @@
 
 #import "UIViewController+GYDNav.h"
 #import <objc/runtime.h>
-#import "GYDTransitionManager.h"
+
 
 
 static const void *D_NavBarAlpha;
-static const void *D_TransitionEnable;
-static const void *D_TransitionManger;
 static const void *D_FullScreenEnable;
 static const void *D_BarBackgroundView;
 static const void *D_ShadowView;
@@ -21,14 +19,27 @@ static const void *D_PanGesturePop;
 
 #define GYD_IOS10Later ([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0)
 
-@interface UINavigationController ()
+static void d_swissleding(Class cls,SEL originalSelector,SEL swizzledSelector,Method originalMethod,Method swizzledMethod) {
+    BOOL didAddMethod = class_addMethod(cls,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod(cls,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    }else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
 
-@property (nonatomic, strong) GYDTransitionManager *transitionManager;
+
+@interface UINavigationController ()
 
 @property (nonatomic, strong) UIView *barBackgroundView;
 
 @property (nonatomic, strong) UIView *shadowView;
-
 
 /**
  是否是pan手势侧滑返回引发的pop 默认NO
@@ -46,6 +57,7 @@ static const void *D_PanGesturePop;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [self swizzledingPop];
+        [self swizzledingPopToRoot];
         [self swizzledingUpdateInteractiveTransition];
         [self swizzledViewDidLoad];
     });
@@ -57,62 +69,35 @@ static const void *D_PanGesturePop;
     SEL swizzledPopSelector = @selector(d_popViewControllerAnimated:);
     Method originalPopMethod = class_getInstanceMethod([self class], originalPopSelector);
     Method swizzledPopMethod = class_getInstanceMethod([self class], swizzledPopSelector);
-    BOOL didAddMethod = class_addMethod([self class],
-                                        originalPopSelector,
-                                        method_getImplementation(swizzledPopMethod),
-                                        method_getTypeEncoding(swizzledPopMethod));
-    if (didAddMethod) {
-        class_replaceMethod([self class],
-                            swizzledPopSelector,
-                            method_getImplementation(originalPopMethod),
-                            method_getTypeEncoding(originalPopMethod));
-    }else {
-        method_exchangeImplementations(originalPopMethod, swizzledPopMethod);
-    }
+    d_swissleding([self class], originalPopSelector, swizzledPopSelector, originalPopMethod, swizzledPopMethod);
 }
+
++ (void)swizzledingPopToRoot {
+    SEL originalSelector = @selector(popToRootViewControllerAnimated:);
+    SEL swizzledSelector = @selector(d_popToRootViewControllerAnimated:);
+    Method originalMethod = class_getInstanceMethod([self class], originalSelector);
+    Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
+    d_swissleding([self class], originalSelector, swizzledSelector, originalMethod, swizzledMethod);
+}
+
 + (void)swizzledingUpdateInteractiveTransition {
     
     SEL originalSelector = NSSelectorFromString(@"_updateInteractiveTransition:");
     SEL swizzledSelector = @selector(d_updateInteractiveTransition:);
     Method originalMethod = class_getInstanceMethod([self class], originalSelector);
     Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    d_swissleding([self class], originalSelector, swizzledSelector, originalMethod, swizzledMethod);
 }
 + (void)swizzledViewDidLoad {
     SEL originalSelector = @selector(viewDidLoad);
     SEL swizzledSelector = @selector(d_viewDidLoad);
     Method originalMethod = class_getInstanceMethod([self class], originalSelector);
     Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
-    BOOL didAddMethod = class_addMethod([self class],
-                                        originalSelector,
-                                        method_getImplementation(swizzledMethod),
-                                        method_getTypeEncoding(swizzledMethod));
-    if (didAddMethod) {
-        class_replaceMethod([self class],
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
+    d_swissleding([self class], originalSelector, swizzledSelector, originalMethod, swizzledMethod);
 }
-
 
 
 #pragma mark - setter/getter
-- (GYDTransitionManager *)transitionManager {
-    id transitionManager = objc_getAssociatedObject(self, &D_TransitionManger);
-    if (!transitionManager) {
-        transitionManager = [[GYDTransitionManager alloc] init];
-        self.transitionManager = transitionManager;
-    }
-    return transitionManager;
-}
-
-- (void)setTransitionManager:(GYDTransitionManager *)transitionManager {
-    if (!transitionManager)return;
-    objc_setAssociatedObject(self,&D_TransitionManger,transitionManager,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (UIView *)barBackgroundView {
     UIView *barBackgroundView  = objc_getAssociatedObject(self, &D_BarBackgroundView);
@@ -178,10 +163,12 @@ static const void *D_PanGesturePop;
         [self pushViewController:viewController animated:YES];
         return;
     }
-    GYDTransitionManager *transitionManager = self.transitionManager;
-    transitionManager.fromAlpha = fromAlpha;
-    transitionManager.toAlpha = toAlpha;
-    self.delegate = self.transitionManager;
+    UIViewController *fromViewcontroller = self.topViewController;
+    CGFloat time = [self transitonTimeWithOperation:UINavigationControllerOperationPush fromViewController:fromViewcontroller toViewController:viewController];
+    [UIView animateWithDuration:time animations:^{
+        [self d_setNavigationBarAlpha:toAlpha];
+    } completion:^(BOOL finished) {
+    }];
     [self pushViewController:viewController animated:YES];
 }
 
@@ -190,30 +177,24 @@ static const void *D_PanGesturePop;
 }
 
 
-
-
 #pragma mark privity
 
 - (void)d_popViewControllerFromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha {
-    GYDTransitionManager *transitionManager = self.transitionManager;
-    transitionManager.fromAlpha = fromAlpha;
-    transitionManager.toAlpha = toAlpha;
-    self.delegate = self.transitionManager;
+    UIViewController *fromViewcontroller = self.topViewController;
+    __weak NSArray *vcs = self.viewControllers;
+    CGFloat time = [self transitonTimeWithOperation:UINavigationControllerOperationPop fromViewController:fromViewcontroller toViewController:[vcs objectAtIndex:vcs.count-2]];
+    [UIView animateWithDuration:time animations:^{
+        [self d_setNavigationBarAlpha:toAlpha];
+    } completion:^(BOOL finished) {
+    }];
+    
     [self d_popViewControllerAnimated:YES];
+    return;
 }
 
 
 - (void)d_popViewControllerAnimated:(BOOL)animated {
-    if (self.isPanGesturePop) {
-        [self d_popViewControllerAnimated:animated];
-        return;
-    }
     __weak UIViewController *fromViewContrller = self.topViewController;
-    BOOL d_transitionEnable = fromViewContrller.d_transitionEnable;
-    if (!d_transitionEnable) {
-        [self d_popViewControllerAnimated:animated];
-        return;
-    }
     CGFloat fromAlpha = fromViewContrller.d_navBarAlpha;
     __weak NSArray *vcs = self.viewControllers;
     if (vcs.count < 2) {
@@ -226,9 +207,43 @@ static const void *D_PanGesturePop;
         [self d_popViewControllerAnimated:animated];
         return;
     }
+    if (!animated) {
+        [self d_setNavigationBarAlpha:toAlpha];
+        [self d_popViewControllerAnimated:animated];
+        return;
+    }
+    if (self.isPanGesturePop) {
+        [self d_popViewControllerAnimated:animated];
+        return;
+    }
     [self d_popViewControllerFromAlpha:fromAlpha  toAlpha:toAlpha];
     return;
 }
+
+- (void)d_popToRootViewControllerAnimated:(BOOL)animated {
+    __weak UIViewController *fromViewController = self.topViewController;
+    CGFloat fromAlpha = fromViewController.d_navBarAlpha;
+    __weak UIViewController *rootViewController = [self.viewControllers firstObject];
+    CGFloat toAlpha = rootViewController.d_navBarAlpha;
+    if (toAlpha == fromAlpha) {
+        [self d_popToRootViewControllerAnimated:animated];
+        return;
+    }
+    if (!animated) {
+        [self d_setNavigationBarAlpha:toAlpha];
+        [self d_popToRootViewControllerAnimated:animated];
+        return;
+    }
+    CGFloat time = [self transitonTimeWithOperation:UINavigationControllerOperationPop fromViewController:fromViewController toViewController:rootViewController];
+    [UIView animateWithDuration:time animations:^{
+        [self d_setNavigationBarAlpha:toAlpha];
+    } completion:^(BOOL finished) {
+    }];
+    
+    [self d_popToRootViewControllerAnimated:animated];
+    return;
+}
+
 
 - (void)d_updateInteractiveTransition:(CGFloat)percentComplete {
     [self d_updateInteractiveTransition:percentComplete];
@@ -242,6 +257,7 @@ static const void *D_PanGesturePop;
         CGFloat currentAlpha = fromAlpha + (toAlpha-fromAlpha)*percentComplete;
         [self d_setNavigationBarAlpha:currentAlpha];
     }
+    return;
 }
 
 - (void)d_viewDidLoad {
@@ -261,9 +277,20 @@ static const void *D_PanGesturePop;
             [gesture setValue:_targets forKey:@"_targets"];
         });
     }
+    return;
 }
 
-
+- (CGFloat)transitonTimeWithOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController  *)fromViewController toViewController:(UIViewController *)toViewController {
+    CGFloat time = 0.25;
+    if (self.delegate) {
+        UIViewController *fromViewcontroller = self.topViewController;
+        if ([self.delegate respondsToSelector:@selector(navigationController:animationControllerForOperation:fromViewController:toViewController:)]) {
+            id<UIViewControllerAnimatedTransitioning> transition = [self.delegate navigationController:self animationControllerForOperation:operation fromViewController:fromViewcontroller toViewController:toViewController];
+            time = [transition transitionDuration:nil];
+        }
+    }
+    return time;
+}
 
 - (void)d_panGesture:(UIPanGestureRecognizer *)pan {
     switch (pan.state) {
@@ -274,9 +301,6 @@ static const void *D_PanGesturePop;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
             self.isPanGesturePop = NO;
-            if ([self.delegate isKindOfClass:[GYDTransitionManager class]]) {
-                self.delegate = nil;
-            }
             break;
         default:
             break;
@@ -285,7 +309,6 @@ static const void *D_PanGesturePop;
 }
 
 
-//获取侧滑返回手势
 - (UIScreenEdgePanGestureRecognizer *)screenEdgePanGestureRecognizer {
     UIScreenEdgePanGestureRecognizer *screenEdgePanGestureRecognizer = nil;
     if (self.view.gestureRecognizers.count > 0) {
@@ -314,10 +337,11 @@ static const void *D_PanGesturePop;
 }
 
 
-
-
 @end
 
+
+
+#pragma mark - UIViewController (GYDNav)
 
 @implementation UIViewController (GYDNav)
 
@@ -342,16 +366,6 @@ static const void *D_PanGesturePop;
     }
     return [d_navBarAlpha doubleValue];
 }
-- (void)setD_transitionEnable:(BOOL)d_transitionEnable {
-    objc_setAssociatedObject(self,&D_TransitionEnable,@(d_transitionEnable),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (BOOL)d_transitionEnable {
-    id d_transitionEnable = objc_getAssociatedObject(self, &D_TransitionEnable);
-    if (!d_transitionEnable) {
-        return YES;
-    }
-    return [d_transitionEnable boolValue];
-}
 - (void)setD_fullScreenEnable:(BOOL)d_fullScreenEnable {
     objc_setAssociatedObject(self,&D_FullScreenEnable,@(d_fullScreenEnable),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -372,18 +386,7 @@ static const void *D_PanGesturePop;
     SEL swizzledSelector = @selector(d_viewDidAppear:);
     Method originalMethod = class_getInstanceMethod([self class], originalSelector);
     Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
-    BOOL didAddMethod = class_addMethod([self class],
-                                        originalSelector,
-                                        method_getImplementation(swizzledMethod),
-                                        method_getTypeEncoding(swizzledMethod));
-    if (didAddMethod) {
-        class_replaceMethod([self class],
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
+    d_swissleding([self class], originalSelector, swizzledSelector, originalMethod, swizzledMethod);
 }
 
 
@@ -404,7 +407,9 @@ static const void *D_PanGesturePop;
             }
         }
     }
+    return;
 }
+
 
 
 @end

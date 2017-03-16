@@ -29,10 +29,12 @@
 }
 
 
-
-
 - (void)pan {
     NSLog(@"---");
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

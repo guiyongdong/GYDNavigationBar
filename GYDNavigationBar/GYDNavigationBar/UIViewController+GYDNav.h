@@ -16,17 +16,11 @@
  */
 @property (nonatomic, assign) CGFloat d_navBarAlpha;
 
-/**
- 是否启用转场动画 默认YES  此转场动画代理只在动画即将开始时启用在结束时废弃
- */
-@property (nonatomic, assign) BOOL d_transitionEnable;
-
 
 /**
  是否启用全屏侧滑返回 默认YES
  */
 @property (nonatomic, assign) BOOL d_fullScreenEnable;
-
 
 
 @end
@@ -36,7 +30,7 @@
 
 
 /**
- 设置导航栏的alpha  非动画型
+ 设置导航栏的alpha
  
  @param alpha 透明度
  */
