@@ -28,7 +28,21 @@
     headerView.backgroundColor = [UIColor orangeColor];
     self.tableView.tableHeaderView = headerView;
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:@"button" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80, 20, 100, 44);
+    button.backgroundColor = [UIColor redColor];
+    [headerView addSubview:button];
+    [button addTarget:self action:@selector(buttonclick) forControlEvents:UIControlEventTouchUpInside];
+    
+    
 }
+
+- (void)buttonclick {
+    CViewController *vc = [[CViewController alloc] init];
+    [self.navigationController d_pushViewController:vc fromAlpha:self.d_navBarAlpha toAlpha:1.0];
+}
+
 
 #pragma mark - Table view data source
 

@@ -22,6 +22,13 @@
 @property (nonatomic, assign) BOOL d_transitionEnable;
 
 
+/**
+ 是否启用全屏侧滑返回 默认YES
+ */
+@property (nonatomic, assign) BOOL d_fullScreenEnable;
+
+
+
 @end
 
 

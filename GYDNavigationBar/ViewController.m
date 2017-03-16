@@ -27,12 +27,11 @@
 }
 
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (IBAction)push:(id)sender {
     BTableViewController *vc = [[BTableViewController alloc] init];
     self.d_transitionEnable = YES;
     [self.navigationController d_pushViewController:vc fromAlpha:1.0 toAlpha:0];
 }
-
 
 
 @end

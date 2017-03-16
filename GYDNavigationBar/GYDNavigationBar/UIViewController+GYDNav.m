@@ -14,70 +14,9 @@
 static const void *D_NavBarAlpha;
 static const void *D_TransitionEnable;
 static const void *D_TransitionManger;
-
-@implementation UIViewController (GYDNav)
-
-+ (void)load {
-     [self swizzledingViewDidAppear];
-}
-
-#pragma mark - setter/getter
-
-- (void)setD_navBarAlpha:(CGFloat)d_navBarAlpha {
-    if (d_navBarAlpha > 1) d_navBarAlpha = 1;
-    if (d_navBarAlpha < 0) d_navBarAlpha = 0;
-    objc_setAssociatedObject(self,&D_NavBarAlpha,@(d_navBarAlpha),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (CGFloat)d_navBarAlpha {
-    id d_navBarAlpha = objc_getAssociatedObject(self, &D_NavBarAlpha);
-    if (!d_navBarAlpha) {
-        return 1.0;
-    }
-    return [d_navBarAlpha doubleValue];
-}
-- (void)setD_transitionEnable:(BOOL)d_transitionEnable {
-    objc_setAssociatedObject(self,&D_TransitionEnable,@(d_transitionEnable),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (BOOL)d_transitionEnable {
-    id d_transitionEnable = objc_getAssociatedObject(self, &D_TransitionEnable);
-    if (!d_transitionEnable) {
-        return YES;
-    }
-    return [d_transitionEnable boolValue];
-}
-
-#pragma mark - swizzleding
-
-+ (void)swizzledingViewDidAppear {
-    SEL originalSelector = @selector(viewDidAppear:);
-    SEL swizzledSelector = @selector(d_viewDidAppear:);
-    Method originalMethod = class_getInstanceMethod([self class], originalSelector);
-    Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
-    BOOL didAddMethod = class_addMethod([self class],
-                                        originalSelector,
-                                        method_getImplementation(swizzledMethod),
-                                        method_getTypeEncoding(swizzledMethod));
-    if (didAddMethod) {
-        class_replaceMethod([self class],
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
+static const void *D_FullScreenEnable;
 
 
-- (void)d_viewDidAppear:(BOOL)animated {
-    [self d_viewDidAppear:animated];
-    if (self.navigationController) {
-        BOOL alpha = self.d_navBarAlpha;
-        [self.navigationController d_setNavigationBarAlpha:alpha];
-    }
-}
-
-
-@end
 
 
 
@@ -92,10 +31,12 @@ static const void *D_TransitionManger;
 #pragma mark - swizzleding
 
 + (void)load {
-    [self swizzledingPop];
-    [self swizzledingUpdateInteractiveTransition];
-    [self swizzledViewDidLoad];
-   
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self swizzledingPop];
+        [self swizzledingUpdateInteractiveTransition];
+        [self swizzledViewDidLoad];
+    });
 }
 
 
@@ -251,8 +192,9 @@ static const void *D_TransitionManger;
 
 - (void)d_viewDidLoad {
     [self d_viewDidLoad];
-    UIPanGestureRecognizer *gesture = [self screenEdgePanGestureRecognizer];
+    UIScreenEdgePanGestureRecognizer *gesture = [self screenEdgePanGestureRecognizer];
     if (gesture) {
+        [self setFullScreenEdge:[UIScreen mainScreen].bounds.size.width edgePanGesture:gesture];
         [gesture addTarget:self action:@selector(d_panGesture:)];
     }
 }
@@ -288,9 +230,115 @@ static const void *D_TransitionManger;
 }
 
 
+- (void)setFullScreenEdge:(CGFloat)edge edgePanGesture:(UIScreenEdgePanGestureRecognizer *)gesture {
+    id panRecognizer = [gesture valueForKey:@"_recognizer"];
+    if (panRecognizer) {
+        id panSetting = [panRecognizer valueForKey:@"_settings"];
+        if (panSetting) {
+            id edgeSetting = [panSetting valueForKey:@"_edgeSettings"];
+            if (edgeSetting) {
+                [edgeSetting setValue:@(edge) forKey:@"_edgeRegionSize"];
+            }
+        }
+    }
+}
+
 
 
 
 @end
+
+
+@implementation UIViewController (GYDNav)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self swizzledingViewDidAppear];
+    });
+    
+}
+
+#pragma mark - setter/getter
+
+- (void)setD_navBarAlpha:(CGFloat)d_navBarAlpha {
+    if (d_navBarAlpha > 1) d_navBarAlpha = 1;
+    if (d_navBarAlpha < 0) d_navBarAlpha = 0;
+    objc_setAssociatedObject(self,&D_NavBarAlpha,@(d_navBarAlpha),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (CGFloat)d_navBarAlpha {
+    id d_navBarAlpha = objc_getAssociatedObject(self, &D_NavBarAlpha);
+    if (!d_navBarAlpha) {
+        return 1.0;
+    }
+    return [d_navBarAlpha doubleValue];
+}
+- (void)setD_transitionEnable:(BOOL)d_transitionEnable {
+    objc_setAssociatedObject(self,&D_TransitionEnable,@(d_transitionEnable),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (BOOL)d_transitionEnable {
+    id d_transitionEnable = objc_getAssociatedObject(self, &D_TransitionEnable);
+    if (!d_transitionEnable) {
+        return YES;
+    }
+    return [d_transitionEnable boolValue];
+}
+- (void)setD_fullScreenEnable:(BOOL)d_fullScreenEnable {
+    objc_setAssociatedObject(self,&D_FullScreenEnable,@(d_fullScreenEnable),OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (BOOL)d_fullScreenEnable {
+    id d_fullScreenEnable = objc_getAssociatedObject(self, &D_FullScreenEnable);
+    if (!d_fullScreenEnable) {
+        return YES;
+    }
+    return [d_fullScreenEnable boolValue];
+}
+
+
+
+#pragma mark - swizzleding
+
++ (void)swizzledingViewDidAppear {
+    SEL originalSelector = @selector(viewDidAppear:);
+    SEL swizzledSelector = @selector(d_viewDidAppear:);
+    Method originalMethod = class_getInstanceMethod([self class], originalSelector);
+    Method swizzledMethod = class_getInstanceMethod([self class], swizzledSelector);
+    BOOL didAddMethod = class_addMethod([self class],
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+    if (didAddMethod) {
+        class_replaceMethod([self class],
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
+
+- (void)d_viewDidAppear:(BOOL)animated {
+    [self d_viewDidAppear:animated];
+    if (self.navigationController) {
+        BOOL alpha = self.d_navBarAlpha;
+        [self.navigationController d_setNavigationBarAlpha:alpha];
+        BOOL d_fullScreenEnable = self.d_fullScreenEnable;
+        CGFloat edge = 13;
+        if (d_fullScreenEnable) {
+            edge = [UIScreen mainScreen].bounds.size.width;
+        }
+        if (self.navigationController) {
+            UIScreenEdgePanGestureRecognizer *gesture = [self.navigationController screenEdgePanGestureRecognizer];
+            if (gesture) {
+                [self.navigationController setFullScreenEdge:edge edgePanGesture:gesture];
+            }
+        }
+        
+    }
+}
+
+@end
+
 
 

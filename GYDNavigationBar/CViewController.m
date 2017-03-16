@@ -7,6 +7,7 @@
 //
 
 #import "CViewController.h"
+#import "UIViewController+GYDNav.h"
 
 @interface CViewController ()
 
@@ -18,15 +19,21 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"正常的控制器";
+    
+    
+    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan)];
+    [self.view addGestureRecognizer:gesture];
+    
+    self.d_fullScreenEnable = NO;
+    
 }
 
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    CViewController *vc = [[CViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+
+
+- (void)pan {
+    NSLog(@"---");
 }
-
-
 
 
 @end
