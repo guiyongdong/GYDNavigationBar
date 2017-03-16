@@ -74,7 +74,18 @@
 
 当然 你也可以直接使用系统的push和pop，如果你想自定义转场动画，需要设置`d_transitionEnable`为NO，此属性表示是否启用转场动画，默认YES。
 
+### 注意
+
 如果你不设置当前控制器的`d_navBarAlpha`透明度，默认为1.0
+
+1.1版本以后添加全屏侧滑返回手势，返回手势依旧使用系统自带的手势。在你不需要全屏侧滑返回的时候，你需要这样做
+```objc
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //取消全屏侧滑返回
+    self.d_fullScreenEnable = NO;
+}
+```
 
 
 如果你发现有什么BUG，欢迎随时Issues
