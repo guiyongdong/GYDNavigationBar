@@ -185,6 +185,15 @@ static const void *D_PanGesturePop;
     [self pushViewController:viewController animated:YES];
 }
 
+- (void)d_setShaowViewHidden:(BOOL)hidden {
+    self.shadowView.hidden = hidden;
+}
+
+
+
+
+#pragma mark privity
+
 - (void)d_popViewControllerFromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha {
     GYDTransitionManager *transitionManager = self.transitionManager;
     transitionManager.fromAlpha = fromAlpha;
@@ -193,8 +202,6 @@ static const void *D_PanGesturePop;
     [self d_popViewControllerAnimated:YES];
 }
 
-
-#pragma mark privity
 
 - (void)d_popViewControllerAnimated:(BOOL)animated {
     if (self.isPanGesturePop) {

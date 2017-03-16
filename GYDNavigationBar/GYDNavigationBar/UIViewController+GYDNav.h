@@ -44,6 +44,14 @@
 
 
 /**
+ 设置导航栏线是否隐藏
+
+ @param hidden 是否隐藏
+ */
+- (void)d_setShaowViewHidden:(BOOL)hidden;
+
+
+/**
  在push下一个控制器之前 添加转场动画代理 动态地修改导航栏的alpha 防止突兀
 
  @param viewController toViewController
@@ -51,8 +59,6 @@
  @param toAlpha 下一个控制器所持有的Alpha
  */
 - (void)d_pushViewController:(UIViewController *)viewController fromAlpha:(CGFloat)fromAlpha toAlpha:(CGFloat)toAlpha;
-
-
 
 
 @end
