@@ -46,7 +46,7 @@
 
 
 /**
- 在push下一个控制器之前 添加转场动画代理 动态地修改导航栏的alpha 防止突兀
+ 在push下一个控制器之前 动态地修改导航栏的alpha
 
  @param viewController toViewController
  @param fromAlpha 上一个控制器所持有的Alpha

@@ -254,6 +254,9 @@ static void d_swissleding(Class cls,SEL originalSelector,SEL swizzledSelector,Me
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         CGFloat fromAlpha = fromViewController.d_navBarAlpha;
         CGFloat toAlpha = toViewController.d_navBarAlpha;
+        if (toAlpha == fromAlpha) {
+            return;
+        }
         CGFloat currentAlpha = fromAlpha + (toAlpha-fromAlpha)*percentComplete;
         [self d_setNavigationBarAlpha:currentAlpha];
     }
@@ -409,6 +412,8 @@ static void d_swissleding(Class cls,SEL originalSelector,SEL swizzledSelector,Me
     }
     return;
 }
+
+
 
 
 
